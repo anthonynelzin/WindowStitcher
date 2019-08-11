@@ -21,6 +21,11 @@ The padding around the window is user-configurable. The window is centred over t
 ## Usage
 
 	python3 window-stitcher.py [-h] [-p PADDING] background window
+
+## Requirements
+
+- argparse
+- pillow
 	
 ## Licence
 
