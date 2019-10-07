@@ -9,9 +9,10 @@
 """
 
 import argparse
+import os
 from PIL import Image
 
-def paste_window(background, window, padding):
+def paste_window(filename, background, window, padding):
     background = Image.open(background)
     window = Image.open(window)
     window.thumbnail((1200, 1200))
@@ -26,7 +27,7 @@ def paste_window(background, window, padding):
     crop = (left,top,right,bottom)
     
     final_img = background.crop(crop)
-    final_img.save("output.png")
+    final_img.save(filename)
 
 def main():
     parser = argparse.ArgumentParser(description="Paste a capture of a window on top of the specified background.")
@@ -35,12 +36,15 @@ def main():
     parser.add_argument("-p", "--padding", help="Padding around the final crop.", type=int)
     
     args = parser.parse_args()
+    
+    filename = os.path.basename(args.window)
+    
     if args.padding:
         padding = args.padding
     else:
         padding = 0
 
-    paste_window(args.background, args.window, padding)
+    paste_window(filename, args.background, args.window, padding)
     
 if __name__ == '__main__':
     main()
